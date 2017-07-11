@@ -58,7 +58,7 @@ Element for adding and viewing entity notes
                   </div>
                   <div class="row">
                     <div class="col-xs-10 col-sm-8">
-                      <span>[[item.createdDate]]</span>
+                      <span>[[item.dateCreated]]</span>
                     </div>
                   </div>
                 </div>
@@ -97,6 +97,7 @@ Element for adding and viewing entity notes
       },
 
       _saveNote: function () {
+        this._toggle();
         this.fire('new-note', this.$.newNoteText.value);
       },
 
