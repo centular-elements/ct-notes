@@ -1,0 +1,22 @@
+{
+  "name": "ct-notes",
+  "description": "Element for adding and viewing entity notes",
+  "main": "ct-notes.html",
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.4.0",
+    "paper-input": "PolymerElements/paper-input#^1.1.23",
+    "paper-button": "PolymerElements/paper-button#v1.0.15",
+    "iron-collapse": "PolymerElements/iron-collapse#^2.0.0",
+    "ct-shared-styles": "git://github.com/Centular/shared-styles.git",
+    "ct-delete-dialog": "centular-elements/ct-delete-dialog",
+    "paper-dialog": "PolymerElements/paper-dialog#^1.1.0",
+    "ct-notes-api": "centular-elements/ct-notes-api",
+    "ct-core-utils": "git://github.com/centular-elements/ct-core-utils"
+  },
+  "devDependencies": {
+    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
+    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^1.0.0",
+    "web-component-tester": "^4.0.0",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
+  }
+}

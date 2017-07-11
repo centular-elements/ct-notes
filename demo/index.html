@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>ct-notes demo</title>
+
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+
+    <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+    <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+    <link rel="import" href="../ct-notes.html">
+    <link rel="import" href="../../ct-core-utils/ct-component-demo-identity.html">
+
+    <style is="custom-style" include="demo-pages-shared-styles">
+    </style>
+  </head>
+  <body>
+    <div class="vertical-section-container centered">
+      <h3>Basic ct-notes demo</h3>
+      <demo-snippet>
+        <template>
+          <ct-component-demo-identity
+                  token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiI3MzU1MTg4NjFlODY0ZjRlODlhNzc5NDY4ZmE0ZWIyYyIsImRpZCI6ImFlZDY5YjdlLTQ5ZjEtNDIyZi04MThiLTBmZjUzMDM3NTQ2YSIsImNpZCI6IjJhYzVhNTVjLWZhZjAtNDQ5OC1iNWI1LTU1ODMwMGNiYzFmZSIsInVpZCI6IjU4ZTQ2MzdmLWUyYzgtNDJmYS1iNGI1LTdlMTk2YWJmNWJhOSIsImp0aSI6IjA1ZWUxOGY1LTMyOWEtNDUyNC04ZWJlLTI1MWJkN2I5NzBjOCIsImV4cCI6MTQ5OTg2MjczMn0.DyYooREQ86AdwUqCrV59PNq2Ea92SKT-8y9tYKPxu9g"
+          ></ct-component-demo-identity>
+
+          <ct-notes notes='[
+    {
+      "id": "7d73127f-d825-42e7-b97a-7a11a2f530a0",
+      "createdBy": {
+        "id": "7d73127f-d825-42e7-b97a-7a11a2f530a0",
+        "firstName": "Rudolf",
+        "lastName": "Du Plessis"
+      },
+      "note": "this is my note lekke lekke lekke",
+      "createdDate": "Tuesday, 11 July 2017 10:01:31"
+    }
+  ]'></ct-notes>
+        </template>
+      </demo-snippet>
+    </div>
+  </body>
+</html>

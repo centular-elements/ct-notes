@@ -1,0 +1,126 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../iron-collapse/iron-collapse.html">
+<link rel="import" href="../paper-input/paper-textarea.html">
+<link rel="import" href="../paper-button/paper-button.html">
+<link rel="import" href="../ct-shared-styles/ct-application-theme.html">
+<link rel="import" href="../ct-delete-dialog/ct-delete-dialog.html">
+<link rel="import" href="../paper-dialog/paper-dialog.html">
+<link rel="import" href="../ct-notes-api/ct-notes-api.html">
+<link rel="import" href="../ct-core-utils/ct-api-consumer-behaviour.html">
+
+<!--
+`ct-notes`
+Element for adding and viewing entity notes
+
+@demo demo/index.html 
+-->
+
+<dom-module id="ct-notes">
+  <template>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <style is="custom-style">
+      :host {
+        display: block;
+      }
+      /* local color for button */
+      paper-button.fancy {
+        margin-top: 3px;
+      }
+      .note-header {
+        background: #c3c3c3;
+        margin-top: 10px;
+        padding: 10px;
+      }
+    </style>
+
+    <ct-notes-api id="notesApi"></ct-notes-api>
+
+    <div class="main-section">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-xs-12 col-sm-4">
+            <paper-button class="fancy margin-10v btn btn-primary" on-tap="_toggle">New Note</paper-button>
+            <iron-collapse id="newNoteCollapse" tabindex="0">
+              <paper-textarea id="newNoteText"></paper-textarea>
+              <paper-button class="fancy margin-10v pull-right btn btn-success" on-tap="_saveNote">Save</paper-button>
+            </iron-collapse>
+          </div>
+        </div>
+        <template is="dom-repeat" items="[[ notes ]]">
+          <div class="row">
+            <div class="col-xs-12 note-header">
+              <div class="row">
+                <div class="col-xs-10 col-sm-8">
+                  <div class="row">
+                    <div class="col-xs-10 col-sm-8">
+                      <span>[[ item.createdBy.firstName ]]&nbsp;[[ item.createdBy.lastName ]]</span>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-xs-10 col-sm-8">
+                      <span>[[item.createdDate]]</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xs-2 col-sm-2">
+                  <paper-button class="fancy margin-10v pull-right btn btn-danger" on-tap="_showDeleteConfim">Delete</paper-button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <paper-textarea readonly value="[[ item.note ]]"></paper-textarea>
+          </div>
+        </template>
+      </div>
+    </div>
+
+    <ct-delete-dialog id="deleteDialog"></ct-delete-dialog>
+  </template>
+
+  <script>
+    Polymer({
+
+      is: 'ct-notes',
+      behaviors: [CT.Behaviours.ApiConsumer],
+
+      properties: {
+        notes: Object
+      },
+
+      listeners: {
+        'delete': '_deleteNote'
+      },
+
+      _toggle: function() {
+        this.$.newNoteCollapse.toggle();
+      },
+
+      _saveNote: function () {
+        this.fire('newNote', this.$.newNoteText.value);
+      },
+
+      _openDeleteModal : function() {
+        this.$.deleteModal.open();
+      },
+
+      _showDeleteConfim: function(e) {
+        this.$.deleteDialog.key = e.model.item.id;
+        this.$.deleteDialog.resource = 'this note';
+        this.$.deleteDialog.subject = 'Note';
+        this.$.deleteDialog.open();
+      },
+
+      _deleteNote: function () {
+        this.$.notesApi.deleteNote(this.$.deleteDialog.key)
+          .then(function () {
+            this.notes = this.notes.filter(function (note) {
+              return note.id != this.$.deleteDialog.key;
+            }.bind(this));
+          }.bind(this))
+          .catch(this.fire.bind(this, 'toast', {message: 'Failed to delete note', type: 'danger'}))
+      }
+
+    });
+  </script>
+</dom-module>
