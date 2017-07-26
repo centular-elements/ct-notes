@@ -12,7 +12,7 @@
 `ct-notes`
 Element for adding and viewing entity notes
 
-@demo demo/index.html 
+@demo demo/index.html
 -->
 
 <dom-module id="ct-notes">
@@ -27,25 +27,79 @@ Element for adding and viewing entity notes
         margin-top: 3px;
       }
       .note-header {
-        background: #c3c3c3;
+        background-color: #88d1f7 !important;
+        color: #fff;
         margin-top: 10px;
         padding: 10px;
       }
       .new-note-text-area {
         margin: 10px 10px 0px;
       }
+
+      .notes-header {
+        background: #33a5e0;
+      }
+      .notes-header h3 {
+        color: #ffffff;
+        margin: 10px 0;
+        font-size: 20px;
+        line-height: 21px;
+      }
+      .breadcrumb-icon {
+        --paper-icon-button-ink-color: {#fff !important;};
+      }
+
+      .text-white {
+        color:#fff;
+      }
+
+      .timestamp {
+        font-size: 0.667em
+      }
     </style>
 
     <ct-notes-api id="notesApi"></ct-notes-api>
-
     <div class="main-section">
       <div class="container-fluid">
         <div class="row">
+          <div class="col-xs-12 notes-header">
+            <div class="row">
+              <div class="col-xs-12 col-sm-8">
+                <div class="row">
+                  <div class="col-xs-12">
+                      <h3 class="ct-header text-white">Notes</h3>
+                  </div>
+                </div>
+
+              </div>
+              <div class="col-xs-12 col-sm-4">
+                <div class="row">
+                  <div class="col-xs-12">
+                      <paper-button class="fancy margin-10v pull-right btn btn-primary" on-tap="_toggle">Add Note</paper-button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+
+
+
+
           <div class="col-xs-12 col-sm-8">
-            <paper-button class="fancy margin-10v btn btn-primary" on-tap="_toggle">New Note</paper-button>
+
             <iron-collapse id="newNoteCollapse" tabindex="0">
-              <paper-textarea class="new-note-text-area" id="newNoteText"></paper-textarea>
-              <paper-button class="fancy margin-10v pull-right btn btn-success" on-tap="_saveNote">Save</paper-button>
+              <div class="row">
+                <div class="col-xs-12">
+                  <div class="input-group">
+                    <paper-textarea class="new-note-text-area" id="newNoteText"></paper-textarea>
+                    <div class="input-group-btn">
+                      <paper-button class="fancy margin-10v pull-right btn btn-success" on-tap="_saveNote">Save</paper-button>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </iron-collapse>
           </div>
         </div>
@@ -61,7 +115,7 @@ Element for adding and viewing entity notes
                   </div>
                   <div class="row">
                     <div class="col-xs-12 col-sm-8">
-                      <span>[[item.dateCreated]]</span>
+                      <span class="timestamp">[[item.dateCreated]]</span>
                     </div>
                   </div>
                 </div>
